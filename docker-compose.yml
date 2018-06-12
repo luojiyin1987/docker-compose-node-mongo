@@ -2,6 +2,8 @@ version: '2'
 services:
   mongodb:
     image: bitnami/mongodb:latest
+    volumes:
+      - ./date:/date/db
     ports:
       - '27017:27017'
   web:

@@ -1,16 +1,27 @@
-var config = require('./config');
-var express = require('express');
-var mongoose = require('mongoose');
-var app = express();
+var keystone = require('keystone');
+keystone.init({
 
-// serve static files from ./public
-app.use(express.static(__dirname + '/public'));
+  'name': 'My Project',
 
-mongoose.connect(config.mongo.url);
-mongoose.connection.once('open', function() {
-  console.log("Connected to db at " + config.mongo.url);
+  'favicon': 'public/favicon.ico',
+  'less': 'public',
+  'static': ['public'],
+
+  'views': 'templates/views',
+  'view engine': 'jade',
+
+  'auto update': true,
+  'mongo': 'mongodb://localhost/my-project',
+
+  'session': true,
+  'auth': true,
+  'user model': 'User',
+  'cookie secret': '(your secret here)'
+
 });
-// start server
-app.listen(config.express.port, '0.0.0.0', function() {
-  console.log('Server started on port ' + config.express.port + '.')
-});
+
+require('./models');
+
+keystone.set('routes', require('./routes'));
+
+keystone.start();

@@ -8,8 +8,8 @@
     "start": "npm install && nodemon -L server.js"
   },
   "dependencies": {
-    "express": "^4.13.3",
-    "mongoose": "^4.6.5",
+    "keystone": "latest",
+    "underscore": "latest",
     "nodemon": "^1.9.2"
   }
 }
